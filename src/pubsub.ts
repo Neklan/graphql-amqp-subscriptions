@@ -77,7 +77,7 @@ export class AMQPPubSub implements PubSubEngine {
   public unsubscribe(subId: number): Promise<void> {
     if (typeof this.subscriptionMap[subId] === 'undefined') {
 
-        // already unsubscribed
+        // already unsubscribed or doesn't exists
         return Promise.resolve();
     }
 
@@ -85,7 +85,10 @@ export class AMQPPubSub implements PubSubEngine {
     const refs = this.subsRefsMap[routingKey];
 
     if (!refs) {
-      throw new Error(`There is no subscription of id "${subId}"`);
+
+      // fix another uncaught exception
+      delete this.subscriptionMap[subId];
+      return Promise.resolve();
     }
 
     if (refs.length === 1) {
