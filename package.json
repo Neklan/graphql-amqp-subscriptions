@@ -1,5 +1,5 @@
 {
-  "name": "graphql-amqp-subscription",
+  "name": "neklan-graphql-amqp-subscriptions",
   "description": "GraphQL AMQP Subscriptions",
   "version": "1.0.4",
   "license": "MIT",
